@@ -6,21 +6,42 @@ class BussinesButtons{
         this.parameters = parameters;
      }
      insertButton(parameters){
-        return new repository().insertButton(parameters);
+        return new Promise(function(resolver,reject){
+            var res = new repository().insertButton(parameters);
+              resolver(res);
+          }).catch(error => reject(error));
      }
      deleteButton(parameters){
-        return new repository().deleteButton(parameters);
+        return new Promise(function(resolver,reject){
+            var res = new repository().deleteButton(parameters);
+              resolver(res);
+          }).catch(error => reject(error));
      }
      updateOneByIdForPlace(parameters){
-        return new repository().updateOneByIdForPlace(parameters);
+        return new Promise(function(resolver,reject){
+            var res = new repository().updateOneByIdForPlace(parameters);
+              resolver(res);
+          }).catch(error => reject(error));
      }
      getOneByIdForPlace(parameters){
-        return new repository().getOneByIdForPlace(parameters);
+        return new Promise(function(resolver,reject){
+            var res = new new repository().getOneByIdForPlace(parameters);
+              resolver(res);
+          }).catch(error => reject(error));
      }
-     getAllForPlace(){
-        return new Promise(function(resolve, reject){
-            resolve(new repository().getAllForPlace());
-        });
+     getAllForPlace(parameters){
+        return new Promise(function(resolver,reject){
+          var res = new repository(parameters).getAllForPlace(parameters);
+            resolver(res);
+        }).catch(error => reject(error));
      }
 }
-module.exports = BussinesButtons;
+module.exports = BussinesButtons;    
+
+                 
+
+
+
+
+
+
