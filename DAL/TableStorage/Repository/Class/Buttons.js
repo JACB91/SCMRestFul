@@ -1,23 +1,23 @@
 var azure = require('azure-storage');
 var accountName = 'vscodetest';
 var accountKey = 'TVHpH9j2ZQsWdnnoiXe50zfJjezEw4WWRZri9qzN9XE+SroY8XSaUQH31rcxV5w2vdYLyp42uB/BMCxduQcy1A==';
-var tableServiceButtons = azure.createTableService(accountName, accountKey);
+var tableService = azure.createTableService(accountName, accountKey);
 
-class button{
+class Button{
     constructor(parameters){
         this.parameters = parameters
     }
     
-    insertButtons(parameters){
-        return insertButtonsFun(parameters).then(function(response){
+    insert(parameters){
+        return insertFun(parameters).then(function(response){
             return JSON.stringify(response);
         }).catch(function(error){
             console.log(error);
             return error;
         });
     }
-    deleteButtons(parameters){
-        return deleteButtonsFun(parameters).then(function(response){
+    delete(parameters){
+        return deleteFun(parameters).then(function(response){
             return JSON.stringify(response);
         }).catch(function(error){
             console.log(error);
@@ -51,7 +51,7 @@ class button{
         });
     }
 }
-module.exports = button;
+module.exports = Button;
 
 /* ------------------------------------------------ Funciones operacionales -------------------------------------------------- */
 
@@ -61,7 +61,7 @@ function getAllForPlacefun(parameters){
             parameters.ID_Pais,
             parameters.Place
             );    
-            tableServiceButtons.queryEntities('Buttons',Query, null, function(error, result, response){
+            tableService.queryEntities('Buttons',Query, null, function(error, result, response){
                 if(!error){
                    return resolve(result.entries);
                 }else{
@@ -79,7 +79,7 @@ function getOneByIdForPlaceFun(parameters){
             parameters.Place,
             parameters.ID_Reference
             );
-            tableServiceButtons.queryEntities('Buttons',Query, null, function(error,result,response){
+            tableService.queryEntities('Buttons',Query, null, function(error,result,response){
                 if(error){
                     return resolve(result.entries);
                 }else{
@@ -89,11 +89,11 @@ function getOneByIdForPlaceFun(parameters){
     });
 }
 
-function insertButtonsFun(parameters){
+function insertFun(parameters){
     return new Promise(function(resolve, reject){
-        tableServiceButtons.createTableIfNotExists('Buttons', function(error,result, response){
+        tableService.createTableIfNotExists('Buttons', function(error,result, response){
             if(!error){
-                tableServiceButtons.insertEntity('Buttons', parameters, function(error, result, response){
+                tableService.insertEntity('Buttons', parameters, function(error, result, response){
                     if(error){
                         return resolve(result.entries);
                     }else{
@@ -105,14 +105,14 @@ function insertButtonsFun(parameters){
     });
 }
 
-function deleteButtonsFun(parameters){
+function deleteFun(parameters){
     return new Promise(function(resolve, reject){
             var Query = new azure.TableQuery() .where('ID_Pais == ? && Place == ? && ID_Reference == ?',
             parameters.ID_Pais,
             parameters.Place,
             parameters.ID_Reference
             );    
-            tableServiceButtons.deleteEntity('Buttons',Query, null, function(error,result,response){
+            tableService.deleteEntity('Buttons',Query, null, function(error,result,response){
                 if(!error){
                    return resolve(result.entries);
                 }else{
@@ -124,7 +124,7 @@ function deleteButtonsFun(parameters){
 
 function updateOneByIdForPlacefun(parameters){
     return new Promise(function(resolve, reject){
-            tableServiceButtons.replaceEntity('Buttons',parameters, null, function(error,result,response){
+        tableService.replaceEntity('Buttons',parameters, null, function(error,result,response){
                 if(!error){
                    return resolve(result.entries);
                 }else{

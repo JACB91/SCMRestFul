@@ -1,19 +1,19 @@
 'use strict'
-var repository = require('../../DAL/TableStorage/Repository/Class/Buttons');
+var repository = require('../../DAL/TableStorage/Repository/Class/PerfilUsers');
 var async = require('async');
-class BussinesButtons{
+class BusinessPerfilUsers{
     constructor(parameters){
         this.parameters = parameters;
      }
-     insertButton(parameters){
+     insert(parameters){
         return new Promise(function(resolver,reject){
-            var res = new repository().insertButton(parameters);
+            var res = new repository().insert(parameters);
               resolver(res);
           }).catch(error => reject(error));
      }
-     deleteButton(parameters){
+     delete(parameters){
         return new Promise(function(resolver,reject){
-            var res = new repository().deleteButton(parameters);
+            var res = new repository().delete(parameters);
               resolver(res);
           }).catch(error => reject(error));
      }
@@ -36,7 +36,7 @@ class BussinesButtons{
         }).catch(error => reject(error));
      }
 }
-module.exports = BussinesButtons;    
+module.exports = BusinessPerfilUsers;    
 
                  
 

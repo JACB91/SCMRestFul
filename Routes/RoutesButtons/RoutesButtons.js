@@ -1,6 +1,6 @@
 var express = require('express');
 var buttonModel = require('../../DAL/Entity/EntityButtons');
-var BALButtons = require('../../BAL/Business/BussinesButtons');
+var BALButtons = require('../../BAL/Business/BusinessButtons');
 var router = express.Router();
 
 router.get('/api/GetAllForPlace/:ID_Pais/:Place', function(req, res){
