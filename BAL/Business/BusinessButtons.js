@@ -7,25 +7,25 @@ class BussinesButtons{
      }
      insert(parameters){
         return new Promise(function(resolver,reject){
-            var res = new repository().insert(parameters);
+            var res = new repository(parameters).insert(parameters);
               resolver(res);
           }).catch(error => reject(error));
      }
      delete(parameters){
         return new Promise(function(resolver,reject){
-            var res = new repository().delete(parameters);
+            var res = new repository(parameters).delete(parameters);
               resolver(res);
           }).catch(error => reject(error));
      }
      updateOneByIdForPlace(parameters){
         return new Promise(function(resolver,reject){
-            var res = new repository().updateOneByIdForPlace(parameters);
+            var res = new repository(parameters).updateOneByIdForPlace(parameters);
               resolver(res);
           }).catch(error => reject(error));
      }
      getOneByIdForPlace(parameters){
         return new Promise(function(resolver,reject){
-            var res = new new repository().getOneByIdForPlace(parameters);
+            var res = new new repository(parameters).getOneByIdForPlace(parameters);
               resolver(res);
           }).catch(error => reject(error));
      }

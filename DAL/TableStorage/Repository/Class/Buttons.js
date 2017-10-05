@@ -81,7 +81,7 @@ function getOneByIdForPlaceFun(parameters){
             );
             tableService.queryEntities('Buttons',Query, null, function(error,result,response){
                 if(error){
-                    return resolve(result.entries);
+                    return resolve(response);
                 }else{
                     return reject(error);
                 }
@@ -114,7 +114,7 @@ function deleteFun(parameters){
             );    
             tableService.deleteEntity('Buttons',Query, null, function(error,result,response){
                 if(!error){
-                   return resolve(result.entries);
+                   return resolve(response);
                 }else{
                    return reject(error);
                 }
@@ -126,7 +126,7 @@ function updateOneByIdForPlacefun(parameters){
     return new Promise(function(resolve, reject){
         tableService.replaceEntity('Buttons',parameters, null, function(error,result,response){
                 if(!error){
-                   return resolve(result.entries);
+                   return resolve(response);
                 }else{
                    return reject(error);
                 }
