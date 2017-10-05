@@ -63,7 +63,7 @@ function getAllForPlacefun(parameters){
             );    
             tableService.queryEntities('Buttons',Query, null, function(error, result, response){
                 if(!error){
-                   return resolve(result.entries);
+                   return resolve(response);
                 }else{
                    return reject(error);
                 }
@@ -95,7 +95,7 @@ function insertFun(parameters){
             if(!error){
                 tableService.insertEntity('Buttons', parameters, function(error, result, response){
                     if(error){
-                        return resolve(result.entries);
+                        return resolve(response);
                     }else{
                         return reject(error);
                      }
